@@ -1,5 +1,11 @@
 <script>
+import GradeInput from '~/components/GradeInput.vue';
+import GradeInfo from '~/components/GradeInfo.vue';
 export default {
+  components: {
+    GradeInput,
+    GradeInfo
+  },
   data() {
     return {
       gradeComponents: [
@@ -10,14 +16,21 @@ export default {
   },
   methods: {
     getTotalWeight() {
-      return this.gradeComponents.reduce((sum, component) => sum + component.weight, 0);
-    }
+    return this.gradeComponents.reduce((sum, component) => sum + Number(component.weight), 0);
+  },
   },
   computed: {
+    neededFinalGrade(){
+      const total = this.gradeComponents.reduce((sum, component) => 
+        sum + (component.value * component.weight / 100), 0);
+      var result = (55 - total) / (this.gradeComponents[1].weight / 100);
+      return result.toFixed(2);
+    },
     conditionalPass() {
       const total = this.gradeComponents.reduce((sum, component) => 
         sum + (component.value * component.weight / 100), 0);
-      return total * 0.5;
+      var result = (50 - total) / (this.gradeComponents[1].weight / 100);
+      return result.toFixed(2);
     },
     pass() {
       return this.gradeComponents.reduce((sum, component) => 
@@ -28,38 +41,44 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col items-center bg-gray-800 min-h-screen p-6">
-    <div class="flex flex-col items-left bg-gray-700 p-6 rounded-xl border border-gray-600 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
-      <div class="flex flex-row justify-between items-center gap-10">
-        <div class="flex flex-1 flex-col border items-left ">
-          <label class="text-gray-400 text-xs block mb-1"> Vize</label>
-          <input v-model.number="gradeComponents[0].value" type="number" :placeholder="'test'"
-           class="bg-gray-600 text-white placeholder-gray-400 p-2 rounded w-full border border-gray-500 focus:ring-2 focus:ring-cyan-400">
-        </div>
-        <div class="flex flex-col border items-left max-w-[80px]">
-            <label class="text-gray-400 text-xs block mb-1"> Ağırlık</label>
-            <input type="number" placeholder="0(%)"
-            class="bg-gray-600 text-white placeholder-gray-400 p-2 rounded border border-gray-500 focus:ring-2 focus:ring-cyan-400  text-center">
-        </div>
+  <div class="flex flex-col items-center bg-gradient-to-r from-gray-900 to-zinc-900 min-h-screen p-6">
+    <button @click="navigateTo('/advancedMode')"
+      class="mt-4 py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow-md transition">
+      Detaylı Moda Geç
+    </button>
+    <div class="flex flex-col items-left bg-linear-to-t from-emerald-900/40 to-sky-900/50 p-6 rounded-xl border border-gray-600 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
+      <GradeInput
+        v-model:value="gradeComponents[0].value"
+        v-model:weight="gradeComponents[0].weight"
+        label="Vize"
+        placeholder="Vize notunuzu girin"
+      />
+      <GradeInput
+        :readOnly="true"
+        v-model:value="neededFinalGrade"
+        v-model:weight="gradeComponents[1].weight"
+        label="Final"
+        placeholder="Final notunuzu girin"
+      />
+      <div class="text-yellow-400 mt-2 " >
+        Toplam ağırlık 100 olmalıdır. <br>
+        <span v-if="getTotalWeight() !== 100" >Şu anki toplam: {{ getTotalWeight() }}</span>
       </div>
 
-      <div class="text-yellow-400 mb-4" v-if="getTotalWeight() !== 100">
-        Toplam ağırlık 100 olmalıdır. Şu anki toplam: {{ getTotalWeight() }}
-      </div>
+      <GradeInfo
+        gradeText="Şartlı geçmek için gereken not"
+        :gradeValue="conditionalPass"
+        infoTextColor="text-emerald-500"
+        infoBgColor="bg-sky-800"
+        infoBgColorHover="hover:bg-sky-700"
+        ></GradeInfo>
 
-      <div class="flex flex-col items-start border  border-gray-600 my-4 py-4 px-3 bg-sky-800 hover:bg-sky-700 transition-colors rounded w-full">
-        <div class="font-bold  text-emerald-500">Puanın:</div>
-        <div class="text-lg text font-semibold text-gray-300">{{ pass }}</div>
-      </div>
-      <div class="flex flex-col items-start border  border-gray-600 my-4 py-4 px-3 bg-sky-800 hover:bg-sky-700 transition-colors rounded w-full">
-        <div class="font-bold  text-emerald-500">Şartlı geçmek için finalden alman gereken not:</div>
-        <div class="text-lg text font-semibold text-gray-300">83.33</div>
-      </div>
-
-      <div class="flex flex-col items-start border border-gray-600 my-4 py-4 px-3 text-white bg-sky-800 hover:bg-sky-700 transition-colors rounded w-full">
-        <div class="font-semibold">Geçmek için finalden alman gereken not:</div>
-        <div class="text-lg font-bold">test</div>
-      </div>
+      <GradeInfo
+        gradeText="Geçmek için gereken not"
+        :gradeValue="neededFinalGrade"
+        infoTextColor="text-emerald-500"
+        infoBgColor="bg-sky-800"
+        infoBgColorHover="hover:bg-sky-700"></GradeInfo>
     </div>
   </div>
 </template>
