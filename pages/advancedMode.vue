@@ -65,10 +65,10 @@ export default {
 <template>
   <div class="flex flex-col items-center justify-center bg-gray-900 min-h-screen p-6">
    <div class="buttons flex flex-row gap-4">
-    <button @click="navigateTo('/basicMode')" 
+    <!-- <button @click="navigateTo('/basicMode')" 
       class="py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow-md transition">
       Basit Moda Geç
-    </button>
+    </button> -->
 
     <button @click="addGradeComponent" 
       class="py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow-md transition">

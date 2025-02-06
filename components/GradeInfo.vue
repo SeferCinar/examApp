@@ -24,7 +24,7 @@ export default{
         infoBgColor:{
             type:String,
             required:false,
-            default:"bg-sky-800",
+            default:" bg-amber-500 dark:bg-sky-800",
         },
         infoBgColorHover:{
             type:String,

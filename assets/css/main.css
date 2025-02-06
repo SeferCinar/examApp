@@ -1,8 +1,4 @@
-@import "tailwindcss";
 
-* {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-body {
-   background-color: gray;
-}
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+

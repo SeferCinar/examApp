@@ -24,7 +24,7 @@
   
             <button @click="toggleColorMode" 
                     class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none">
-              <svg v-if="colorMode === 'dark'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg v-if="colorMode.value === 'dark'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
               </svg>
               <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -40,6 +40,9 @@
                   <path v-else stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               </button>
+                  <div class="bg-white dark:bg-black text-black dark:text-white p-4">
+                       Açık modda beyaz arka plan, siyah yazı; koyu modda siyah arka plan, beyaz yazı.
+                  </div>
             </div>
           </div>
         </div>
@@ -70,12 +73,10 @@
   </template>
   
   <script setup lang="ts">
-  import { useColorMode } from '@vueuse/core'
-  
   const colorMode = useColorMode()
   const isOpen = ref(false)
   
   function toggleColorMode() {
-    colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
-  }
+  colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+ }
   </script> 
