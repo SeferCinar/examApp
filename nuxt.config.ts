@@ -20,4 +20,17 @@ export default defineNuxtConfig({
     fallback: 'light',
     preference: 'light',
   },
+  app: {
+    head: {
+      title: 'ExamApp',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'ExamApp', content: 'Öğrenciler için çeşitli araçları içeren bir site' }
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ]
+    }
+  }
 })
