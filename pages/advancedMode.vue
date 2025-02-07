@@ -63,7 +63,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center bg-gray-900 min-h-screen p-6">
+  <div class="flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 min-h-screen p-6">
    <div class="buttons flex flex-row gap-4">
     <!-- <button @click="navigateTo('/basicMode')" 
       class="py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow-md transition">
@@ -71,12 +71,12 @@ export default {
     </button> -->
 
     <button @click="addGradeComponent" 
-      class="py-3 px-6 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded-xl shadow-md transition">
+      class="py-3 px-6 bg-sky-400 hover:bg-sky-500 text-white dark:bg-sky-800 dark:hover:bg-sky-900 dark:text-gray-100 font-semibold rounded-xl shadow-md transition">
       Not Bileşeni Ekle
     </button>
 
    </div>
-    <div class="flex-1 flex flex-col items-center bg-linear-to-t from-emerald-900/40 to-sky-900/50  p-6 rounded-xl border border-gray-600 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
+    <div class="flex-1 flex flex-col items-center bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
       <GradeInputX
         v-for="(component, index) in gradeComponents"
         :key="index"
@@ -87,16 +87,22 @@ export default {
         class="mb-4"
         @delete="removeGradeComponent(index)"
       />
-      <div class="text-yellow-400 mt-2 " >
+      <div class="text-sky-800 dark:text-teal-600 font-bold text-m mt-2" >
         Toplam ağırlık 100 olmalıdır. <br>
         <span v-if="totalWeight !== 100" >Şu anki toplam: {{ totalWeight }}</span>
       </div>
       <GradeInfo
         gradeText="Notunuz"
-        :gradeValue="totalGrade"></GradeInfo>
+        :gradeValue="totalGrade"
+        textColor="text-purple-400 dark:text-emerald-400"
+        bgColor="bg-gray-100 dark:bg-sky-900"
+        bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"></GradeInfo>
       <GradeInfo
         gradeText="Harf Notunuz"
-        :gradeValue="letterGrade"></GradeInfo>
+        :gradeValue="letterGrade"
+        textColor="text-purple-400 dark:text-emerald-400"
+        bgColor="bg-gray-100 dark:bg-sky-900"
+        bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"></GradeInfo>
     </div>
   </div>
 </template>

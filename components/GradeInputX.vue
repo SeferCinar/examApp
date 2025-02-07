@@ -2,7 +2,7 @@
   <div class="flex flex-row justify-between items-center gap-4">
     <!-- Ana Input Alanı -->
     <div class="flex flex-1 flex-col items-left">
-      <label class="text-gray-400 text-xs block mb-1">{{ label }}</label>
+      <label class="text-gray-700 dark:text-gray-300 text-xs block mb-1">{{ label }}</label>
       <input
         :readonly="readOnly"
         min="0"
@@ -10,27 +10,33 @@
         @input="$emit('update:value', $event.target.value)"
         type="number"
         :placeholder="placeholder"
-        class="bg-gray-700 text-white placeholder-gray-400 p-2 rounded w-full border border-gray-500 focus:ring-2 focus:ring-cyan-400"
+        class="w-full p-2 rounded shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-cyan-400
+               bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-gray-100
+               border border-gray-300 dark:border-gray-700
+               placeholder-gray-500 dark:placeholder-gray-400"
       />
     </div>
 
     <!-- Ağırlık Input Alanı -->
     <div class="flex flex-col items-left max-w-[80px]">
-      <label class="text-gray-400 text-xs block mb-1">Ağırlık</label>
+      <label class="text-gray-700 dark:text-gray-300 text-xs block mb-1">Ağırlık</label>
       <input
         min="0"
         :value="weight"
         @input="$emit('update:weight', $event.target.value)"
         type="number"
         placeholder="0(%)"
-        class="bg-gray-700 text-white placeholder-gray-400 p-2 rounded border border-gray-500 focus:ring-2 focus:ring-cyan-400 text-center"
+        class="w-full p-2 rounded shadow-sm text-center focus:outline-none focus:ring-2 focus:ring-cyan-400
+               bg-gray-100 dark:bg-gray-800/80 text-gray-900 dark:text-gray-100
+               border border-gray-300 dark:border-gray-700
+               placeholder-gray-500 dark:placeholder-gray-400"
       />
     </div>
 
     <!-- Silme Butonu -->
     <button
       @click="$emit('delete')"
-      class="bg-red-600 hover:bg-red-700 text-white mt-6 p-2.5 rounded focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-200"
+      class="bg-red-500/80 hover:bg-red-600/80 dark:bg-red-800 dark:hover:bg-red-900 shadow-sm text-white mt-5.5 p-2.5 rounded focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-200"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
