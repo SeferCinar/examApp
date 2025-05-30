@@ -17,6 +17,12 @@
                     text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
               Detaylı Mod
             </NuxtLink>
+
+            <NuxtLink to="/savedNotes"
+              class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                    text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+              Kayıtlı Notlarım
+            </NuxtLink>
           </div>
 
           <button @click="toggleColorMode"
@@ -63,6 +69,12 @@
           class="block pl-3 pr-4 py-2 text-base font-medium rounded-md
                  text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
           Detaylı Mod
+        </NuxtLink>
+
+        <NuxtLink to="/savedNotes"
+          class="block pl-3 pr-4 py-2 text-base font-medium rounded-md
+                 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+          Kayıtlı Notlarım
         </NuxtLink>
       </div>
     </div>

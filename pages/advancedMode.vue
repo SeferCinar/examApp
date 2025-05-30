@@ -1,10 +1,12 @@
 <script>
 import GradeInputX from '~/components/GradeInputX.vue';
 import GradeInfo from '~/components/GradeInfo.vue';
+import SaveNotes from '~/components/SaveNotes.vue';
 export default {
   components: {
     GradeInputX,
-    GradeInfo
+    GradeInfo,
+    SaveNotes
   },
   data() {
     return {
@@ -24,7 +26,8 @@ export default {
       { min: 55, grade: 'C3' },
       { min: 50, grade: 'D1' },
       { min: 0, grade: 'F1' }
-    ]
+    ],
+    isSaveModalOpen: false
     };
   },
   methods: {
@@ -43,7 +46,15 @@ export default {
         this.gradeComponents = [];
       }
     },
-    
+    openSaveModal() {
+      this.isSaveModalOpen = true;
+    },
+    closeSaveModal() {
+      this.isSaveModalOpen = false;
+    },
+    onNoteSaved() {
+      // You can add a notification or feedback here if needed
+    }
   },
   computed: {
     letterGrade() {
@@ -75,6 +86,10 @@ export default {
       Not Bileşeni Ekle
     </button>
 
+    <button @click="openSaveModal" 
+      class="py-3 px-6 bg-emerald-500 hover:bg-emerald-600 text-white dark:bg-emerald-700 dark:hover:bg-emerald-800 dark:text-gray-100 font-semibold rounded-xl shadow-md transition">
+      Notları Kaydet
+    </button>
    </div>
     <div class="flex-1 flex flex-col items-center bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
       <GradeInputX
@@ -104,5 +119,13 @@ export default {
         bgColor="bg-gray-100 dark:bg-sky-900"
         bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"></GradeInfo>
     </div>
+
+    <SaveNotes
+      :is-open="isSaveModalOpen"
+      :grade-components="gradeComponents"
+      :letter-grade="letterGrade"
+      @close="closeSaveModal"
+      @saved="onNoteSaved"
+    />
   </div>
 </template>
