@@ -1,0 +1,36 @@
+{
+  "$schema": "../_schema.json",
+  "id": "adu-bilgisayar-muh",
+  "university": {
+    "tr": "Aydın Adnan Menderes Üniversitesi",
+    "en": "Aydın Adnan Menderes University",
+    "shortCode": "ADÜ"
+  },
+  "department": {
+    "tr": "Bilgisayar Mühendisliği",
+    "en": "Computer Engineering"
+  },
+  "gradingScale": {
+    "A1": { "min": 95, "max": 100 },
+    "A2": { "min": 90, "max": 94 },
+    "A3": { "min": 85, "max": 89 },
+    "B1": { "min": 80, "max": 84 },
+    "B2": { "min": 75, "max": 79 },
+    "B3": { "min": 70, "max": 74 },
+    "C1": { "min": 65, "max": 69 },
+    "C2": { "min": 60, "max": 64 },
+    "C3": { "min": 55, "max": 59 },
+    "D1": { "min": 50, "max": 54 },
+    "F1": { "min": 0, "max": 49 }
+  },
+  "passingGrade": "C3",
+  "conditionalPassingGrade": "D1",
+  "examWeights": {
+    "midterm": 0.4,
+    "final": 0.6
+  },
+  "metadata": {
+    "contributedBy": "@SeferCinar",
+    "lastUpdated": "2026-05-20"
+  }
+}

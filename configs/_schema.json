@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://exam.sefercinar.com/configs/_schema.json",
+  "title": "University Grading Config",
+  "description": "examApp v2 — bir üniversite/bölümün not hesaplama yapılandırması.",
+  "type": "object",
+  "required": ["id", "university", "department", "gradingScale", "passingGrade", "examWeights"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Tüm config'ler arasında benzersiz kebab-case kimlik."
+    },
+    "university": {
+      "type": "object",
+      "required": ["tr", "shortCode"],
+      "additionalProperties": false,
+      "properties": {
+        "tr": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 },
+        "shortCode": { "type": "string", "minLength": 1 }
+      }
+    },
+    "department": {
+      "type": "object",
+      "required": ["tr"],
+      "additionalProperties": false,
+      "properties": {
+        "tr": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 }
+      }
+    },
+    "gradingScale": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[A-Z][A-Z0-9]?$": {
+          "type": "object",
+          "required": ["min", "max"],
+          "additionalProperties": false,
+          "properties": {
+            "min": { "type": "number", "minimum": 0, "maximum": 100 },
+            "max": { "type": "number", "minimum": 0, "maximum": 100 },
+            "gpa": { "type": "number", "minimum": 0, "maximum": 4 }
+          }
+        }
+      }
+    },
+    "passingGrade": {
+      "type": "string",
+      "description": "gradingScale içindeki bir harf — bu eşik ve üzeri 'geçti' sayılır."
+    },
+    "conditionalPassingGrade": {
+      "type": "string",
+      "description": "Opsiyonel: şartlı geçme harfi (varsa)."
+    },
+    "examWeights": {
+      "type": "object",
+      "required": ["midterm", "final"],
+      "additionalProperties": false,
+      "properties": {
+        "midterm": { "type": "number", "minimum": 0, "maximum": 1 },
+        "final": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "courses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code", "name"],
+        "additionalProperties": false,
+        "properties": {
+          "code": { "type": "string" },
+          "name": { "type": "string" },
+          "credit": { "type": "number", "minimum": 0 },
+          "semester": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "contributedBy": { "type": "string" },
+        "lastUpdated": { "type": "string" },
+        "sourceUrl": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

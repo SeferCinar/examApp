@@ -162,84 +162,78 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      savedNotes: [],
-      isEditModalOpen: false,
-      editingNote: null,
-      gradeRanges: [
-        { min: 95, grade: 'A1' },
-        { min: 90, grade: 'A2' },
-        { min: 85, grade: 'A3' },
-        { min: 80, grade: 'B1' },
-        { min: 75, grade: 'B2' },
-        { min: 70, grade: 'B3' },
-        { min: 65, grade: 'C1' },
-        { min: 60, grade: 'C2' },
-        { min: 55, grade: 'C3' },
-        { min: 50, grade: 'D1' },
-        { min: 0, grade: 'F1' }
-      ]
-    }
-  },
-  computed: {
-    editingNoteLetterGrade() {
-      if (!this.editingNote) return '';
-      
-      const totalGrade = this.editingNote.components.reduce((sum, component) => 
-        sum + (Number(component.value) * Number(component.weight) / 100), 0);
-      
-      const range = this.gradeRanges.find(range => totalGrade >= range.min);
-      return range ? range.grade : 'Geçersiz';
-    },
-    editingNoteTotalWeight() {
-      if (!this.editingNote) return 0;
-      return this.editingNote.components.reduce((sum, component) => sum + Number(component.weight), 0);
-    }
-  },
-  mounted() {
-    this.loadSavedNotes()
-  },
-  methods: {
-    loadSavedNotes() {
-      const notes = JSON.parse(localStorage.getItem('savedNotes') || '[]')
-      this.savedNotes = notes.sort((a, b) => new Date(b.date) - new Date(a.date))
-    },
-    deleteNote(id) {
-      if (confirm('Bu notu silmek istediğinizden emin misiniz?')) {
-        const notes = JSON.parse(localStorage.getItem('savedNotes') || '[]')
-        const updatedNotes = notes.filter(note => note.id !== id)
-        localStorage.setItem('savedNotes', JSON.stringify(updatedNotes))
-        this.loadSavedNotes()
-      }
-    },
-    openEditModal(note) {
-      this.editingNote = JSON.parse(JSON.stringify(note)) // Deep copy
-      this.isEditModalOpen = true
-    },
-    closeEditModal() {
-      this.isEditModalOpen = false
-      this.editingNote = null
-    },
-    saveEditedNote() {
-      if (!this.editingNote.name) return
+<script setup>
+const config = await useUniversityConfig('adu-bilgisayar-muh')
+if (!config) {
+  throw createError({ statusCode: 500, statusMessage: 'Yapılandırma yüklenemedi.' })
+}
 
-      const notes = JSON.parse(localStorage.getItem('savedNotes') || '[]')
-      const index = notes.findIndex(note => note.id === this.editingNote.id)
-      
-      if (index !== -1) {
-        notes[index] = {
-          ...this.editingNote,
-          letterGrade: this.editingNoteLetterGrade,
-          date: new Date().toISOString() // Update the date when edited
-        }
-        localStorage.setItem('savedNotes', JSON.stringify(notes))
-        this.loadSavedNotes()
-        this.closeEditModal()
-      }
-    }
+const { letterFromScore } = useGradeCalculator(config)
+
+const savedNotes = ref([])
+const isEditModalOpen = ref(false)
+const editingNote = ref(null)
+
+const editingNoteLetterGrade = computed(() => {
+  if (!editingNote.value) return ''
+  const totalGrade = editingNote.value.components.reduce(
+    (sum, c) => sum + (Number(c.value) * Number(c.weight)) / 100,
+    0
+  )
+  return letterFromScore(totalGrade)
+})
+
+const editingNoteTotalWeight = computed(() => {
+  if (!editingNote.value) return 0
+  return editingNote.value.components.reduce(
+    (sum, c) => sum + Number(c.weight),
+    0
+  )
+})
+
+function loadSavedNotes() {
+  const notes = JSON.parse(localStorage.getItem('savedNotes') || '[]')
+  savedNotes.value = notes.sort((a, b) => new Date(b.date) - new Date(a.date))
+}
+
+function deleteNote(id) {
+  if (confirm('Bu notu silmek istediğinizden emin misiniz?')) {
+    const notes = JSON.parse(localStorage.getItem('savedNotes') || '[]')
+    const updatedNotes = notes.filter((note) => note.id !== id)
+    localStorage.setItem('savedNotes', JSON.stringify(updatedNotes))
+    loadSavedNotes()
   }
 }
+
+function openEditModal(note) {
+  editingNote.value = JSON.parse(JSON.stringify(note))
+  isEditModalOpen.value = true
+}
+
+function closeEditModal() {
+  isEditModalOpen.value = false
+  editingNote.value = null
+}
+
+function saveEditedNote() {
+  if (!editingNote.value.name) return
+
+  const notes = JSON.parse(localStorage.getItem('savedNotes') || '[]')
+  const index = notes.findIndex((note) => note.id === editingNote.value.id)
+
+  if (index !== -1) {
+    notes[index] = {
+      ...editingNote.value,
+      letterGrade: editingNoteLetterGrade.value,
+      date: new Date().toISOString(),
+    }
+    localStorage.setItem('savedNotes', JSON.stringify(notes))
+    loadSavedNotes()
+    closeEditModal()
+  }
+}
+
+onMounted(() => {
+  loadSavedNotes()
+})
 </script> 
