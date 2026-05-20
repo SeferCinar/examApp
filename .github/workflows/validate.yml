@@ -22,6 +22,11 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - run: npm ci
+      # Using `npm install` instead of `npm ci`: this repo is developed on
+      # Windows, which doesn't pin platform-specific optional transitive deps
+      # (e.g. bare-events) that Linux resolves — `npm ci` would fail on the
+      # mismatch. `npm install` is forgiving and validate's job is config
+      # correctness, not lockfile strictness.
+      - run: npm install --no-audit --no-fund
 
       - run: npm run validate
