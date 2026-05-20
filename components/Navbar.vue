@@ -4,18 +4,10 @@
       <div class="flex justify-center h-16">
         <div class="flex items-center">
           <div class="hidden sm:flex sm:space-x-8 mr-4">
-          
-
-            <NuxtLink to="/basicMode"
+            <NuxtLink to="/"
               class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
                     text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              Basit Mod
-            </NuxtLink>
-
-            <NuxtLink to="/advancedMode"
-              class="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                    text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-              Detaylı Mod
+              Ana Sayfa
             </NuxtLink>
 
             <NuxtLink to="/savedNotes"
@@ -57,18 +49,10 @@
     <!-- Mobile menu -->
     <div v-show="isOpen" class="md:hidden">
       <div class="pt-2 pb-3 space-y-1">
-       
-
-        <NuxtLink to="/basicMode"
+        <NuxtLink to="/"
           class="block pl-3 pr-4 py-2 text-base font-medium rounded-md
                  text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-          Basit Mod
-        </NuxtLink>
-
-        <NuxtLink to="/advancedMode"
-          class="block pl-3 pr-4 py-2 text-base font-medium rounded-md
-                 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
-          Detaylı Mod
+          Ana Sayfa
         </NuxtLink>
 
         <NuxtLink to="/savedNotes"

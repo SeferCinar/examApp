@@ -2,16 +2,15 @@
 import GradeInput from '~/components/GradeInput.vue'
 import GradeInfo from '~/components/GradeInfo.vue'
 
-const config = await useUniversityConfig('adu-bilgisayar-muh')
-if (!config) {
-  throw createError({ statusCode: 500, statusMessage: 'Yapılandırma yüklenemedi.' })
-}
+const props = defineProps({
+  config: { type: Object, required: true },
+})
 
-const { passingThreshold, conditionalPassingThreshold } = useGradeCalculator(config)
+const { passingThreshold, conditionalPassingThreshold } = useGradeCalculator(props.config)
 
 const gradeComponents = reactive([
-  { name: 'Midterm', weight: config.examWeights.midterm * 100, value: 0 },
-  { name: 'Final', weight: config.examWeights.final * 100, value: 0 },
+  { name: 'Midterm', weight: props.config.examWeights.midterm * 100, value: 0 },
+  { name: 'Final', weight: props.config.examWeights.final * 100, value: 0 },
 ])
 
 function getTotalWeight() {
@@ -33,8 +32,8 @@ const conditionalPass = computed(() => neededForThreshold(conditionalPassingThre
 </script>
 
 <template>
-  <div class="flex flex-col items-center bg-gray-100 dark:bg-gray-800 min-h-screen p-6">
-    <div class="flex flex-col items-left bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
+  <div class="flex flex-col items-center">
+    <div class="flex flex-col items-left bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all">
       <GradeInput
         v-model:value="gradeComponents[0].value"
         v-model:weight="gradeComponents[0].weight"

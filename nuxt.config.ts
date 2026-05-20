@@ -4,7 +4,8 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   routeRules: {
-    "/": { redirect: "/basicMode" }
+    "/basicMode": { redirect: "/adu/bilgisayar-muh" },
+    "/advancedMode": { redirect: "/adu/bilgisayar-muh" }
   },
   vite: {
     plugins: [

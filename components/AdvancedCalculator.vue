@@ -3,16 +3,15 @@ import GradeInputX from '~/components/GradeInputX.vue'
 import GradeInfo from '~/components/GradeInfo.vue'
 import SaveNotes from '~/components/SaveNotes.vue'
 
-const config = await useUniversityConfig('adu-bilgisayar-muh')
-if (!config) {
-  throw createError({ statusCode: 500, statusMessage: 'Yapılandırma yüklenemedi.' })
-}
+const props = defineProps({
+  config: { type: Object, required: true },
+})
 
-const { letterFromScore } = useGradeCalculator(config)
+const { letterFromScore } = useGradeCalculator(props.config)
 
 const gradeComponents = ref([
-  { name: 'Midterm', weight: config.examWeights.midterm * 100, value: 0 },
-  { name: 'Final', weight: config.examWeights.final * 100, value: 0 },
+  { name: 'Midterm', weight: props.config.examWeights.midterm * 100, value: 0 },
+  { name: 'Final', weight: props.config.examWeights.final * 100, value: 0 },
 ])
 const isSaveModalOpen = ref(false)
 
@@ -55,7 +54,7 @@ function onNoteSaved() {}
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 min-h-screen p-6">
+  <div class="flex flex-col items-center justify-center">
     <div class="buttons flex flex-row gap-4">
       <button
         @click="addGradeComponent"
