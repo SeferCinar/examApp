@@ -6,7 +6,7 @@
 
 [![validate](https://github.com/SeferCinar/examApp/actions/workflows/validate.yml/badge.svg)](https://github.com/SeferCinar/examApp/actions/workflows/validate.yml)
 [![live](https://img.shields.io/badge/live-exam.sefercinar.com-emerald)](https://exam.sefercinar.com)
-[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![license](https://img.shields.io/badge/license-CC%20BY--SA%204.0-blue.svg)](LICENSE)
 
 ---
 
@@ -84,7 +84,9 @@ Kısa özet:
 
 ## Lisans
 
-MIT. Bkz. [LICENSE](LICENSE).
+[Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)](LICENSE).
+
+Kullanır, değiştirir, dağıtırken **atıf ver** ve türev çalışmanı **aynı lisansla** yayımla. Detay için [creativecommons.org/licenses/by-sa/4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## İletişim
 
