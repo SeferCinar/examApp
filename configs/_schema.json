@@ -2,25 +2,28 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://exam.sefercinar.com/configs/_schema.json",
   "title": "University Grading Config",
-  "description": "examApp v2 — bir üniversite/bölümün not hesaplama yapılandırması.",
+  "description": "examApp v2 — bir üniversite/bölümün not hesaplama yapılandırması. Cross-property kuralları (examWeights toplamı, gradingScale tam kapsama, id benzersizliği) scripts/validate-configs.ts tarafından kontrol edilir.",
   "type": "object",
   "required": ["id", "university", "department", "gradingScale", "passingGrade", "examWeights"],
   "additionalProperties": false,
   "properties": {
-    "$schema": { "type": "string" },
+    "$schema": {
+      "type": "string",
+      "description": "Editör desteği için bu şemaya işaret eder (göreceli yol)."
+    },
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
-      "description": "Tüm config'ler arasında benzersiz kebab-case kimlik."
+      "description": "Tüm config'ler arasında benzersiz kebab-case kimlik. Format: '{uni-kısa-kodu}-{bölüm-slug}' önerilir (örn. 'adu-bilgisayar-muh')."
     },
     "university": {
       "type": "object",
       "required": ["tr", "shortCode"],
       "additionalProperties": false,
       "properties": {
-        "tr": { "type": "string", "minLength": 1 },
-        "en": { "type": "string", "minLength": 1 },
-        "shortCode": { "type": "string", "minLength": 1 }
+        "tr": { "type": "string", "minLength": 1, "description": "Türkçe tam isim." },
+        "en": { "type": "string", "minLength": 1, "description": "İngilizce tam isim (opsiyonel)." },
+        "shortCode": { "type": "string", "minLength": 1, "description": "Kısa kod (örn. ADÜ, ODTÜ, İTÜ)." }
       }
     },
     "department": {
@@ -28,13 +31,14 @@
       "required": ["tr"],
       "additionalProperties": false,
       "properties": {
-        "tr": { "type": "string", "minLength": 1 },
-        "en": { "type": "string", "minLength": 1 }
+        "tr": { "type": "string", "minLength": 1, "description": "Türkçe bölüm adı." },
+        "en": { "type": "string", "minLength": 1, "description": "İngilizce bölüm adı (opsiyonel)." }
       }
     },
     "gradingScale": {
       "type": "object",
-      "minProperties": 1,
+      "description": "Harf notu → puan aralığı eşlemesi. Aralıklar 0-100 arasını çakışmadan tam kapsamalı (script kontrolü). Anahtarlar büyük harf + opsiyonel rakam (örn. AA, BA, A1, F1).",
+      "minProperties": 2,
       "additionalProperties": false,
       "patternProperties": {
         "^[A-Z][A-Z0-9]?$": {
@@ -42,25 +46,43 @@
           "required": ["min", "max"],
           "additionalProperties": false,
           "properties": {
-            "min": { "type": "number", "minimum": 0, "maximum": 100 },
-            "max": { "type": "number", "minimum": 0, "maximum": 100 },
-            "gpa": { "type": "number", "minimum": 0, "maximum": 4 }
+            "min": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Bu harfin alt sınırı (dahil). min <= max zorunlu (script kontrolü)."
+            },
+            "max": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100,
+              "description": "Bu harfin üst sınırı (dahil)."
+            },
+            "gpa": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 4,
+              "description": "Opsiyonel: 4'lük sistem üzerinden GPA değeri. Resmi kaynak yoksa eklemeyin."
+            }
           }
         }
       }
     },
     "passingGrade": {
       "type": "string",
-      "description": "gradingScale içindeki bir harf — bu eşik ve üzeri 'geçti' sayılır."
+      "pattern": "^[A-Z][A-Z0-9]?$",
+      "description": "gradingScale içindeki bir harf — bu eşik ve üzeri 'geçti' sayılır (script eşleşmeyi kontrol eder)."
     },
     "conditionalPassingGrade": {
       "type": "string",
-      "description": "Opsiyonel: şartlı geçme harfi (varsa)."
+      "pattern": "^[A-Z][A-Z0-9]?$",
+      "description": "Opsiyonel: şartlı geçme harfi (varsa). gradingScale içinde tanımlı olmalı."
     },
     "examWeights": {
       "type": "object",
       "required": ["midterm", "final"],
       "additionalProperties": false,
+      "description": "Vize/final ağırlıkları. midterm + final = 1.0 olmalı (script kontrolü).",
       "properties": {
         "midterm": { "type": "number", "minimum": 0, "maximum": 1 },
         "final": { "type": "number", "minimum": 0, "maximum": 1 }
@@ -68,13 +90,14 @@
     },
     "courses": {
       "type": "array",
+      "description": "Opsiyonel ders listesi.",
       "items": {
         "type": "object",
         "required": ["code", "name"],
         "additionalProperties": false,
         "properties": {
-          "code": { "type": "string" },
-          "name": { "type": "string" },
+          "code": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
           "credit": { "type": "number", "minimum": 0 },
           "semester": { "type": "integer", "minimum": 1 }
         }
@@ -84,9 +107,9 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "contributedBy": { "type": "string" },
-        "lastUpdated": { "type": "string" },
-        "sourceUrl": { "type": ["string", "null"] }
+        "contributedBy": { "type": "string", "description": "GitHub kullanıcı adı (@ ile başlamalı)." },
+        "lastUpdated": { "type": "string", "format": "date", "description": "ISO 8601 tarih (YYYY-MM-DD)." },
+        "sourceUrl": { "type": ["string", "null"], "format": "uri", "description": "Resmi şartname/yönetmelik URL'i." }
       }
     }
   }

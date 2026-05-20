@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "validate": "tsx scripts/validate-configs.ts"
   },
   "dependencies": {
     "@nuxt/image": "^1.9.0",
@@ -24,7 +25,10 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.31"
+    "postcss": "^8.4.31",
+    "tsx": "^4.22.3"
   }
 }
