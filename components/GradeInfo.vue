@@ -16,7 +16,7 @@
         required: true,
       },
       gradeValue: {
-        type: Number,
+        type: [Number, String],
         required: true,
       },
       textColor: {

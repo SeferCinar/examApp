@@ -70,32 +70,33 @@ function onNoteSaved() {}
         Notları Kaydet
       </button>
     </div>
-    <div class="flex-1 flex flex-col items-center bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
-      <GradeInputX
-        v-for="(component, index) in gradeComponents"
-        :key="index"
-        v-model:value="component.value"
-        v-model:weight="component.weight"
-        :label="component.name"
-        placeholder="Notunuzu girin"
-        class="mb-4"
-        @delete="removeGradeComponent(index)"
-      />
-      <div class="text-sky-800 dark:text-teal-600 font-bold text-m mt-2">
+    <div class="flex flex-col items-stretch w-full max-w-xl bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all mt-6">
+      <div class="flex flex-col gap-4">
+        <GradeInputX
+          v-for="(component, index) in gradeComponents"
+          :key="index"
+          v-model:value="component.value"
+          v-model:weight="component.weight"
+          :label="component.name"
+          placeholder="Notunuzu girin"
+          @delete="removeGradeComponent(index)"
+        />
+      </div>
+      <div class="text-sky-800 dark:text-teal-600 font-bold text-sm mt-4">
         Toplam ağırlık 100 olmalıdır. <br>
         <span v-if="totalWeight !== 100">Şu anki toplam: {{ totalWeight }}</span>
       </div>
       <GradeInfo
         gradeText="Notunuz"
-        :gradeValue="totalGrade"
-        textColor="text-purple-400 dark:text-emerald-400"
+        :gradeValue="totalGrade.toFixed(2)"
+        textColor="text-purple-500 dark:text-emerald-400"
         bgColor="bg-gray-100 dark:bg-sky-900"
         bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"
       />
       <GradeInfo
         gradeText="Harf Notunuz"
         :gradeValue="letterGrade"
-        textColor="text-purple-400 dark:text-emerald-400"
+        textColor="text-purple-500 dark:text-emerald-400"
         bgColor="bg-gray-100 dark:bg-sky-900"
         bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"
       />

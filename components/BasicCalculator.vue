@@ -33,7 +33,7 @@ const conditionalPass = computed(() => neededForThreshold(conditionalPassingThre
 
 <template>
   <div class="flex flex-col items-center">
-    <div class="flex flex-col items-left bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all">
+    <div class="flex flex-col w-full max-w-xl bg-gray-200 dark:bg-gray-700 p-6 rounded-xl border border-gray-300 dark:border-gray-500 hover:border-gray-400 hover:shadow-lg transition-all">
       <GradeInput
         v-model:value="gradeComponents[0].value"
         v-model:weight="gradeComponents[0].weight"
@@ -47,7 +47,7 @@ const conditionalPass = computed(() => neededForThreshold(conditionalPassingThre
         label="Final"
         placeholder="Final notunuzu girin"
       />
-      <div class="text-sky-800 dark:text-teal-600 font-bold text-m mt-2">
+      <div class="text-sky-800 dark:text-teal-600 font-bold text-sm mt-3">
         Toplam ağırlık 100 olmalıdır. <br>
         <span v-if="getTotalWeight() !== 100">Şu anki toplam: {{ getTotalWeight() }}</span>
       </div>
@@ -55,7 +55,7 @@ const conditionalPass = computed(() => neededForThreshold(conditionalPassingThre
       <GradeInfo
         gradeText="Şartlı geçmek için gereken not"
         :gradeValue="conditionalPass"
-        textColor="text-purple-400 dark:text-emerald-400"
+        textColor="text-purple-500 dark:text-emerald-400"
         bgColor="bg-gray-100 dark:bg-sky-900"
         bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"
       />
@@ -63,7 +63,7 @@ const conditionalPass = computed(() => neededForThreshold(conditionalPassingThre
       <GradeInfo
         gradeText="Geçmek için gereken not"
         :gradeValue="neededFinalGrade"
-        textColor="'text-emerald-500 dark:text-emerald-400"
+        textColor="text-emerald-500 dark:text-emerald-400"
         bgColor="bg-gray-100 dark:bg-sky-900"
         bgColorHover="hover:bg-teal-50 dark:hover:bg-sky-800"
       />

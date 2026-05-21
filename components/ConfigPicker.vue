@@ -43,7 +43,7 @@ function go() {
 }
 
 const baseSelectClass =
-  'w-full p-3 rounded-lg border bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-400 disabled:opacity-50 disabled:cursor-not-allowed'
+  'w-full p-3 pr-9 rounded-lg border bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-sky-400 disabled:opacity-50 disabled:cursor-not-allowed appearance-none'
 </script>
 
 <template>
@@ -52,38 +52,48 @@ const baseSelectClass =
       <label for="picker-university" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         Üniversite
       </label>
-      <select
-        id="picker-university"
-        v-model="selectedUni"
-        :class="baseSelectClass"
-        :disabled="pending || !!error"
-      >
-        <option :value="null" disabled>
-          {{ pending ? 'Yükleniyor…' : 'Bir üniversite seç' }}
-        </option>
-        <option v-for="u in universities" :key="u.slug" :value="u.slug">
-          {{ u.shortCode }} — {{ u.name }}
-        </option>
-      </select>
+      <div class="relative">
+        <select
+          id="picker-university"
+          v-model="selectedUni"
+          :class="baseSelectClass"
+          :disabled="pending || !!error"
+        >
+          <option :value="null" disabled>
+            {{ pending ? 'Yükleniyor…' : 'Bir üniversite seç' }}
+          </option>
+          <option v-for="u in universities" :key="u.slug" :value="u.slug">
+            {{ u.shortCode }} — {{ u.name }}
+          </option>
+        </select>
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 h-[18px] w-[18px] text-gray-500 dark:text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
     </div>
 
     <div>
       <label for="picker-department" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         Bölüm
       </label>
-      <select
-        id="picker-department"
-        v-model="selectedDept"
-        :class="baseSelectClass"
-        :disabled="!selectedUni"
-      >
-        <option :value="null" disabled>
-          {{ selectedUni ? 'Bir bölüm seç' : 'Önce üniversite seç' }}
-        </option>
-        <option v-for="d in departments" :key="d.slug" :value="d.slug">
-          {{ d.name }}
-        </option>
-      </select>
+      <div class="relative">
+        <select
+          id="picker-department"
+          v-model="selectedDept"
+          :class="baseSelectClass"
+          :disabled="!selectedUni"
+        >
+          <option :value="null" disabled>
+            {{ selectedUni ? 'Bir bölüm seç' : 'Önce üniversite seç' }}
+          </option>
+          <option v-for="d in departments" :key="d.slug" :value="d.slug">
+            {{ d.name }}
+          </option>
+        </select>
+        <svg class="absolute right-3 top-1/2 -translate-y-1/2 h-[18px] w-[18px] text-gray-500 dark:text-gray-400 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
     </div>
 
     <button

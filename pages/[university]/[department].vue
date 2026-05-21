@@ -29,6 +29,12 @@ useHead({
     : 'Bulunamadı — ExamApp',
 })
 
+const router = useRouter()
+function changeConfig() {
+  lastUsed.clear()
+  router.push('/')
+}
+
 const tabClass = (active) =>
   [
     'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
@@ -55,6 +61,16 @@ const tabClass = (active) =>
 
       <BasicCalculator v-if="mode === 'basic'" :config="config" />
       <AdvancedCalculator v-else :config="config" />
+
+      <div class="text-center mt-8">
+        <button
+          type="button"
+          @click="changeConfig"
+          class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition"
+        >
+          ← Üniversite / bölüm değiştir
+        </button>
+      </div>
     </div>
   </div>
 
