@@ -99,7 +99,7 @@ const baseSelectClass =
     <button
       type="submit"
       :disabled="!canContinue"
-      class="w-full py-3 px-6 bg-sky-500 hover:bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-800 text-white font-semibold rounded-lg shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-sky-500 dark:disabled:hover:bg-sky-700"
+      class="w-full py-3 mt-3 px-6 bg-sky-500 hover:bg-sky-600 dark:bg-sky-700 dark:hover:bg-sky-800 text-white font-semibold rounded-lg shadow-md transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-sky-500 dark:disabled:hover:bg-sky-700"
     >
       Devam et →
     </button>
