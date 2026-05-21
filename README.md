@@ -89,6 +89,22 @@ Kısa özet:
 
 Kullanır, değiştirir, dağıtırken **atıf ver** ve türev çalışmanı **aynı lisansla** yayımla. Detay için [creativecommons.org/licenses/by-sa/4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
+## Katkıda bulunanlar
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/SeferCinar">
+        <img src="https://github.com/SeferCinar.png?size=80" width="80" alt="Sefer Çınar"/><br/>
+        <sub><b>Sefer Çınar</b></sub>
+      </a><br/>
+      <sub>📋 yaratıcı · 💻 kod · 📖 dokümantasyon · 🔧 config (ADÜ)</sub>
+    </td>
+  </tr>
+</table>
+
+Sırada **sen** olabilirsin — [CONTRIBUTING.md](CONTRIBUTING.md)'ye göz at.
+
 ## İletişim
 
 - **Sefer Çınar** · [sefercinar.com](https://sefercinar.com) · [@SeferCinar](https://github.com/SeferCinar)
