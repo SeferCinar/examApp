@@ -47,7 +47,7 @@ const baseSelectClass =
 </script>
 
 <template>
-  <form class="space-y-4" @submit.prevent="go">
+  <form class="space-y-6" @submit.prevent="go">
     <div>
       <label for="picker-university" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
         Üniversite

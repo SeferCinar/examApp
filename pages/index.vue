@@ -1,5 +1,6 @@
 <script setup>
 import ConfigPicker from '~/components/ConfigPicker.vue'
+import Wordmark from '~/components/Wordmark.vue'
 
 const lastUsed = useLastUsedConfig()
 const router = useRouter()
@@ -17,7 +18,7 @@ useHead({ title: 'ExamApp — Üniversite seçimi' })
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-800 p-6">
     <header class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-2">ExamApp</h1>
+      <Wordmark size="xl" tag="h1" class="mb-3" />
       <p class="text-gray-600 dark:text-gray-400">Üniversiteni ve bölümünü seç</p>
     </header>
 
