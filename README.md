@@ -21,7 +21,8 @@
 
 | Üniversite | Bölüm | URL | Kaynak |
 |---|---|---|---|
-| Aydın Adnan Menderes Üniversitesi (ADÜ) | Bilgisayar Mühendisliği | [`/adu/bilgisayar-muh`](https://exam.sefercinar.com/adu/bilgisayar-muh) | — |
+| Aydın Adnan Menderes Üniversitesi (ADÜ) | Bilgisayar Mühendisliği | [`/adu/bilgisayar-muh`](https://exam.sefercinar.com/adu/bilgisayar-muh) | [Yönetmelik (RG 05.08.2024)](https://idari.adu.edu.tr/db/ogrenciisleri/webfolders/topics/20240807101225-LISANSEITIMYNETMELII-000063626896031471822672.pdf) |
+| Aydın Adnan Menderes Üniversitesi (ADÜ) | Elektrik-Elektronik Mühendisliği | [`/adu/elektrik-elektronik`](https://exam.sefercinar.com/adu/elektrik-elektronik) | [Yönetmelik (RG 05.08.2024)](https://idari.adu.edu.tr/db/ogrenciisleri/webfolders/topics/20240807101225-LISANSEITIMYNETMELII-000063626896031471822672.pdf) |
 
 Bölümün burada yok mu? [Katkıda bulun](CONTRIBUTING.md) — bir JSON dosyası ekleyip PR aç, yeter.
 

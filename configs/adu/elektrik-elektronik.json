@@ -1,14 +1,14 @@
 {
   "$schema": "../_schema.json",
-  "id": "adu-bilgisayar-muh",
+  "id": "adu-elektrik-elektronik",
   "university": {
     "tr": "Aydın Adnan Menderes Üniversitesi",
     "en": "Aydın Adnan Menderes University",
     "shortCode": "ADÜ"
   },
   "department": {
-    "tr": "Bilgisayar Mühendisliği",
-    "en": "Computer Engineering"
+    "tr": "Elektrik-Elektronik Mühendisliği",
+    "en": "Electrical and Electronics Engineering"
   },
   "gradingScale": {
     "A1": { "min": 95, "max": 100, "gpa": 4.0 },
